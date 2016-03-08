@@ -75,7 +75,7 @@ public class log_in extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel1.setText("ระบบผู้จัดการ (Admin) ระบบบริการสระว่ายน้ำมหาวิทยาลัยราชภัฏนครปฐม");
@@ -216,11 +216,11 @@ public class log_in extends javax.swing.JFrame {
        ad.setAdmin_username(in_username.getText());
        System.out.println("St id login = "+ad.getAdmin_username());
        ad.setAdmin_password(pw);       
-       user form2 = new user();
-        user =new user();
-    
-        form2.setVisible(true);
-        close();
+   //    user form2 = new user();
+        user Userform=new user();
+        hide();
+        Userform.setVisible(true);
+      
       
         
  }else {
@@ -237,12 +237,14 @@ public class log_in extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
