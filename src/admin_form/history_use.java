@@ -31,11 +31,11 @@ User us = new User();
         initComponents();
         
        // us.ShowUser();
-        	DefaultTableModel model = (DefaultTableModel)showdata.getModel();
+        	DefaultTableModel model = (DefaultTableModel)Table_History_Use.getModel();
 	
         	//Header Sort
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
-		showdata.setRowSorter(sorter);
+		Table_History_Use.setRowSorter(sorter);
                 Connection connect = null;
 		Statement stmt = null;
 		
@@ -96,7 +96,7 @@ User us = new User();
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        showdata = new javax.swing.JTable();
+        Table_History_Use = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btn_menu = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -104,17 +104,17 @@ User us = new User();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        in_fname = new javax.swing.JTextField();
+        in_lname = new javax.swing.JTextField();
+        in_type = new javax.swing.JTextField();
+        in_id = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        showdata.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        showdata.setModel(new javax.swing.table.DefaultTableModel(
+        Table_History_Use.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        Table_History_Use.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -125,10 +125,15 @@ User us = new User();
                 "รหัสสมาชิก", "ชื่อ", "นามสกุล", "ประเภทผู้ใช้งาน"
             }
         ));
-        showdata.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        showdata.setEnabled(false);
-        showdata.setName(""); // NOI18N
-        jScrollPane1.setViewportView(showdata);
+        Table_History_Use.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Table_History_Use.setName(""); // NOI18N
+        Table_History_Use.setSurrendersFocusOnKeystroke(true);
+        Table_History_Use.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                Table_History_UseMouseMoved(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Table_History_Use);
 
         jLabel1.setFont(new java.awt.Font("TH Sarabun New", 0, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Swimming Pool-64.png"))); // NOI18N
@@ -159,13 +164,13 @@ User us = new User();
         jLabel6.setText("ประเภทผู้ใช้งาน");
         jLabel6.setToolTipText("");
 
-        jTextField2.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_fname.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_lname.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_type.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        jFormattedTextField1.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_id.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
 
@@ -197,18 +202,18 @@ User us = new User();
                                     .addComponent(jLabel4))
                                 .addGap(25, 25, 25)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                                    .addComponent(jTextField2)))
+                                    .addComponent(in_id, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                    .addComponent(in_fname)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(55, 55, 55)
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3))
+                                .addComponent(in_lname))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(in_type, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(76, 76, 76)
                                 .addComponent(jButton1)
@@ -229,19 +234,19 @@ User us = new User();
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(in_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(in_fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(in_lname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(in_type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_menu)
@@ -261,6 +266,16 @@ User us = new User();
         u.setVisible(true);
         close();
     }//GEN-LAST:event_btn_menuActionPerformed
+
+    private void Table_History_UseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table_History_UseMouseMoved
+        // TODO add your handling code here:
+            DefaultTableModel model = (DefaultTableModel) Table_History_Use.getModel();
+      in_id.setText(model.getValueAt(Table_History_Use.getSelectedRow(),0).toString());
+      in_fname.setText(model.getValueAt(Table_History_Use.getSelectedRow(),1).toString());
+      in_lname.setText(model.getValueAt(Table_History_Use.getSelectedRow(),2).toString());
+      in_type.setText(model.getValueAt(Table_History_Use.getSelectedRow(),3).toString());
+   
+    }//GEN-LAST:event_Table_History_UseMouseMoved
 
     /**
      * @param args the command line arguments
@@ -299,10 +314,14 @@ User us = new User();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Table_History_Use;
     private javax.swing.JButton btn_menu;
+    private javax.swing.JTextField in_fname;
+    private javax.swing.JFormattedTextField in_id;
+    private javax.swing.JTextField in_lname;
+    private javax.swing.JTextField in_type;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -310,9 +329,5 @@ User us = new User();
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTable showdata;
     // End of variables declaration//GEN-END:variables
 }

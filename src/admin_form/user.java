@@ -183,14 +183,29 @@ Staff st = new Staff();
         jButton3.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/administrator-icon.png"))); // NOI18N
         jButton3.setText("หน้าผู้จัดการ ( Admin )");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/teacher-icon (1).png"))); // NOI18N
         jButton5.setText("หน้าจัดการผู้สอน( Trainner )");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/engineer-icon.png"))); // NOI18N
         jButton6.setText("หน้าจัดการเจ้าหน้าที่( Staff )");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -274,6 +289,27 @@ Staff st = new Staff();
         cu.setVisible(true);
             close();
     }//GEN-LAST:event_btn_courseuserActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        show_list_admin sla = new show_list_admin();
+        sla.setVisible(true);
+        close();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+         show_list_trainner slt = new show_list_trainner();
+        slt.setVisible(true);
+        close();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+          show_list_staff sls = new show_list_staff();
+        sls.setVisible(true);
+        close();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
