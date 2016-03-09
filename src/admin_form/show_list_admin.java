@@ -115,7 +115,7 @@ sorter.setSortKeys(null);
         txt_password = new javax.swing.JTextField();
         txt_fname = new javax.swing.JTextField();
         txt_lname = new javax.swing.JTextField();
-        btn_add = new javax.swing.JButton();
+        btn_Add = new javax.swing.JButton();
         btn_detete = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -181,7 +181,7 @@ sorter.setSortKeys(null);
             }
         });
 
-        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add-contact-icon.png"))); // NOI18N
+        btn_Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add-contact-icon.png"))); // NOI18N
 
         btn_detete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
 
@@ -233,7 +233,7 @@ sorter.setSortKeys(null);
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_detete, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
@@ -276,7 +276,7 @@ sorter.setSortKeys(null);
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_detete, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(74, 74, 74))
@@ -393,7 +393,7 @@ sorter.setSortKeys(null);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table_Admin;
-    private javax.swing.JButton btn_add;
+    private javax.swing.JButton btn_Add;
     private javax.swing.JButton btn_detete;
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_menu;

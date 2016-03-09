@@ -8,6 +8,7 @@ package admin_form;
 import static SystemNpruPool.ConnectDB.passwordDB;
 import static SystemNpruPool.ConnectDB.urlConnection;
 import static SystemNpruPool.ConnectDB.usernameDB;
+import SystemNpruPool_Admin.Admin_Trainermode;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -112,8 +113,8 @@ sorter.setSortKeys(null);
         in_id = new javax.swing.JTextField();
         in_name = new javax.swing.JTextField();
         in_work_time = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_add = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         in_age = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -122,7 +123,7 @@ sorter.setSortKeys(null);
         in_tel = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         in_work_day = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btn_edit = new javax.swing.JButton();
         btn_menu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -164,9 +165,14 @@ sorter.setSortKeys(null);
 
         in_work_time.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add-contact-icon.png"))); // NOI18N
+        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add-contact-icon.png"))); // NOI18N
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
+        btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel4.setText("อายุ");
@@ -189,7 +195,7 @@ sorter.setSortKeys(null);
         in_work_day.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         in_work_day.setToolTipText("");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Pencil-icon.png"))); // NOI18N
+        btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Pencil-icon.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,11 +224,11 @@ sorter.setSortKeys(null);
                             .addComponent(in_work_day, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btn_delete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 71, Short.MAX_VALUE)
@@ -265,9 +271,9 @@ sorter.setSortKeys(null);
                     .addComponent(in_work_time, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -337,6 +343,22 @@ sorter.setSortKeys(null);
         close();
     }//GEN-LAST:event_btn_menuActionPerformed
 
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        // TODO add your handling code here:
+       Admin_Trainermode Atm = new Admin_Trainermode();
+       if(in_id.getText().equals("")){
+           
+       }
+       else{
+           
+       
+       Atm.AddTrainer(Integer.valueOf(in_id.getText()),in_name.getText(),Integer.valueOf(in_age.getText()),in_cardid.getText(),in_tel.getText()
+               ,in_work_day.getText(),in_work_time.getText());
+      
+       }
+       
+    }//GEN-LAST:event_btn_addActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -374,6 +396,9 @@ sorter.setSortKeys(null);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table_Trainner;
+    private javax.swing.JButton btn_add;
+    private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_menu;
     private javax.swing.JTextField in_age;
     private javax.swing.JTextField in_cardid;
@@ -382,9 +407,6 @@ sorter.setSortKeys(null);
     private javax.swing.JTextField in_tel;
     private javax.swing.JTextField in_work_day;
     private javax.swing.JTextField in_work_time;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

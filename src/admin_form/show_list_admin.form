@@ -198,7 +198,7 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Component id="btn_add" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="btn_Add" min="-2" pref="70" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btn_detete" min="-2" pref="68" max="-2" attributes="0"/>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
@@ -251,7 +251,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btn_add" min="-2" pref="46" max="-2" attributes="0"/>
+                      <Component id="btn_Add" min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="btn_detete" min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="btn_edit" min="-2" pref="46" max="-2" attributes="0"/>
                   </Group>
@@ -347,7 +347,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_lnameActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_add">
+        <Component class="javax.swing.JButton" name="btn_Add">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/image/add-contact-icon.png"/>
