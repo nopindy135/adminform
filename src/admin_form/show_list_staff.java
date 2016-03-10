@@ -129,6 +129,11 @@ sorter.setSortKeys(null);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("แสดงรายชื่อเจ้าหน้าที่");
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel2.setText("แก้ไขข้อมูลเจ้าหน้าที่ ( Staff )");
@@ -398,6 +403,65 @@ sorter.setSortKeys(null);
         Asm.EditStaff(Integer.valueOf(in_id.getText()),in_password.getText(),in_name.getText(),in_age.getText(),in_work_day.getText()
                 ,in_start_day.getText(),in_start_time.getText(),in_end_time.getText());
     }//GEN-LAST:event_btn_editActionPerformed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+         DefaultTableModel model = (DefaultTableModel)Table_Staff.getModel();
+	
+        	//Header Sort
+		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
+		Table_Staff.setRowSorter(sorter);
+    
+
+//String expr = E_Uid.getText();
+//sorter.setRowFilter(RowFilter.regexFilter(expr));
+sorter.setSortKeys(null);
+           
+		
+		try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
+                    stmt=connect.createStatement();
+			
+			sql = "SELECT * FROM  staff  ORDER BY St_ID ASC";
+			
+			ResultSet rec = stmt.executeQuery(sql);
+			int row = 0;
+			while((rec!=null) && (rec.next()))
+            {			
+			//	model.addRow(new Object[0]);
+				model.setValueAt(rec.getString("St_ID"), row, 0);
+				model.setValueAt(rec.getString("St_Name"), row, 1);
+				model.setValueAt(rec.getString("St_Password"), row, 2);
+				model.setValueAt(rec.getString("St_Age"), row, 3);
+                                model.setValueAt(rec.getString("St_Workday"), row, 4);
+                                model.setValueAt(rec.getString("St_Startdate"), row, 5);
+                                model.setValueAt(rec.getString("St_Start_Time"), row, 6);
+                                model.setValueAt(rec.getString("St_End_Time"), row, 7);
+                         
+			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
+			//	model.setValueAt(rec.getFloat("Used"), row, 5);
+				row++;
+            }
+
+			rec.close();
+             
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
+		
+		try {
+			if(stmt != null) {
+				stmt.close();
+				connect.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }//GEN-LAST:event_formMouseMoved
 
     /**
      * @param args the command line arguments

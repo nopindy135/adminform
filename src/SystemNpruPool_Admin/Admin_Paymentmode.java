@@ -17,28 +17,36 @@ import java.sql.Statement;
  *
  * @author Godonlyknows
  */
-public class Admin_Coursemode {
-    int c_id;
-    String c_name;
-    int c_age_limit;
-    String c_hour_coues;
-    String c_hour_of_coues;
-    public void ShowDetailCourse(){
-    }
-    public void AddCourse(int id ,String name,int age_limit,
-            String hour_coues,String hour_of_coues){
-        	Connection connect = null;
+public class Admin_Paymentmode {
+    public int p_id ;
+    public int p_money;
+    public String p_date;
+    public String p_time;
+    public String p_type;
+    public int u_id ;
+    public int st_id;
+    
+     public void AddPayment(int id ,
+                         int money,
+                         String date,
+                         String time,
+                         String type,
+                         int uid,
+                         int st_id
+                         ){
+        
+		Connection connect = null;
                 Statement stmt = null;
 		
 		try {
                         Class.forName("com.mysql.jdbc.Driver");
                      connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
 			stmt = connect.createStatement();
-			String sql = "INSERT INTO coues " +
-					"(C_ID,C_Name,C_Age_Limit,C_Hour_Coues,C_Hour_of_Coues) " + 
-					"VALUES ('" + id + "','" + name + "','" + age_limit + "'"
+			String sql = "INSERT INTO payment " +
+					"(P_Id,P_Money,P_Date,P_Time,P_Type,U_Id,St_Id) " + 
+					"VALUES ('" + id + "','" + money + "','" + date + "'"
                                 + "" +
-					",'" + hour_coues + "','" + hour_of_coues + "') ";
+					",'" + time + "','" + type + "','" + uid + "','" + st_id + "') ";
                          stmt.execute(sql);
              
                          System.out.println("Record User Inserted Successfully");
@@ -58,25 +66,33 @@ public class Admin_Coursemode {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+        
         
     }
-    public void EditCourse(int id ,String name,int age_limit,
-            String hour_coues,String hour_of_coues){
-           Connection connect = null;
+    public void EditPayment(int id ,
+                         int money,
+                         String date,
+                         String time,
+                         String type,
+                         int uid,
+                         int st_id
+                         ){
+         Connection connect = null;
                 Statement stmt = null;
 		
 		try {
                         Class.forName("com.mysql.jdbc.Driver");
                         connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
 			stmt = connect.createStatement();
-                        String sql = "UPDATE coues " +
-					
-                                "SET C_Name = '" + name + "' " +
-                                ", C_Age_Limit = '" + age_limit + "' " +
-                                ", C_Hour_Coues = '" + hour_coues + "' " +
-                                ", C_Hour_of_Coues = '" + hour_of_coues + "' " +
-                               
-					" WHERE C_ID = '" + id + "' ";
+                        String sql = "UPDATE payment " +
+                                "SET P_Money = '" + money + "' " +
+                                ", P_Date = '" + date + "' " +
+                                ", P_Time = '" + time + "' " +
+                                ", P_Type = '" + type + "' " +
+                                ", U_Id = '" + uid + "' " +
+                                ", St_Id = '" + st_id + "' " +
+					" WHERE P_Id = '" + id + "' ";
              stmt.execute(sql);
             
              System.out.println("Record Update Successfully");
@@ -98,7 +114,7 @@ public class Admin_Coursemode {
 		}
         
     }
-    public void DeleteCourse(int cid){
+    public void DeletePayment(int id){
          Connection connect = null;
                 Statement stmt = null;
 		
@@ -106,8 +122,8 @@ public class Admin_Coursemode {
                         Class.forName("com.mysql.jdbc.Driver");
                         connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
 			stmt = connect.createStatement();
-                        String sql = "DELETE FROM coues " +
-					" WHERE C_ID ='" + cid + "' ";
+                        String sql = "DELETE FROM payment " +
+					" WHERE P_Id ='" + id + "' ";
              stmt.execute(sql);
             
              System.out.println("Record Delete Member Successfully");
@@ -127,5 +143,6 @@ public class Admin_Coursemode {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
     }
 }

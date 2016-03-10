@@ -187,16 +187,16 @@ public class Admin {
                         connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
 			stmt = connect.createStatement();
                         String sql = "UPDATE Admin " +
-					"SET Admin_ID = '" + id + "' " +
-                                "SET Admin_Username = '" + username + "' " +
+					
+                               // "SET Admin_Username = '" + username + "' " +
                                 "SET Admin_Password = '" + password + "' " +
-                                "SET Admin_FirstName = '" + fname + "' " +
-                                "SET Admin_LastaName = '" + lname + "' " +
-                                "SET Admin_CardID = '" + cardid + "' " +
-                                "SET Admin_Phonenumber = '" + phonenumber + "' " +
+                                ", Admin_FirstName = '" + fname + "' " +
+                                ", Admin_LastName = '" + lname + "' " +
+                                ", Admin_CardID = '" + cardid + "' " +
+                                ", Admin_Phonenumber = '" + phonenumber + "' " +
                                 
                                
-					" WHERE Admin_ID = '" + id + "' ";
+					" WHERE Admin_Username = '" + username + "' ";
              stmt.execute(sql);
             
              System.out.println("Record Update Successfully");

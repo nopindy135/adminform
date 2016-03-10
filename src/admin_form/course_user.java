@@ -5,6 +5,7 @@
  */
 package admin_form;
 
+import SystemNpruPool_Admin.Admin_Registermode;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -21,7 +22,7 @@ import javax.swing.table.TableRowSorter;
  * @author Boss
  */
 public class course_user extends javax.swing.JFrame {
-
+Admin_Registermode arm = new Admin_Registermode();
     /**
      * Creates new form course_user
      */
@@ -48,10 +49,11 @@ public class course_user extends javax.swing.JFrame {
 			while((rec!=null) && (rec.next()))
             {			
 				model.addRow(new Object[0]);
-				model.setValueAt(rec.getString("U_ID"), row, 0);
-				model.setValueAt(rec.getString("U_Firstname"), row, 1);
-				model.setValueAt(rec.getString("U_Lastname"), row, 2);
-				model.setValueAt(rec.getString("register.R_Type"), row, 3);
+				model.setValueAt(rec.getString("register.R_ID"), row, 0);
+                                	model.setValueAt(rec.getString("U_ID"), row, 1);
+				model.setValueAt(rec.getString("U_Firstname"), row, 2);
+				model.setValueAt(rec.getString("U_Lastname"), row, 3);
+				model.setValueAt(rec.getString("register.R_Type"), row, 4);
 			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
 			//	model.setValueAt(rec.getFloat("Used"), row, 5);
 				row++;
@@ -95,18 +97,23 @@ public class course_user extends javax.swing.JFrame {
         btn_menu = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        in_rid = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        in_fname = new javax.swing.JTextField();
+        in_lname = new javax.swing.JTextField();
+        in_course = new javax.swing.JTextField();
         btn_delete = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("รายชื่อผู้เข้าเรียนคอร์สว่ายน้ำ");
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("TH Sarabun New", 0, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Swimming-52.png"))); // NOI18N
@@ -118,10 +125,14 @@ public class course_user extends javax.swing.JFrame {
 
             },
             new String [] {
-                "รหัสสมาชิก", "ชื่อ", "นามสกุล", "ประเภทคอร์ส"
+                "รหัสการสมัคร", "รหัสสมาชิก", "ชื่อ", "นามสกุล", "ประเภทคอร์ส"
             }
         ));
-        showcourse.setEnabled(false);
+        showcourse.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                showcourseMouseMoved(evt);
+            }
+        });
         jScrollPane1.setViewportView(showcourse);
 
         btn_menu.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
@@ -137,9 +148,9 @@ public class course_user extends javax.swing.JFrame {
         jLabel2.setText("แก้ไขข้อมูล");
 
         jLabel3.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel3.setText("รหัสสมาชิก");
+        jLabel3.setText("รหัสการสมัคร");
 
-        jTextField1.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_rid.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel4.setText("ชื่อ");
@@ -150,15 +161,25 @@ public class course_user extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel6.setText("ประเภทคอร์ส");
 
-        jTextField2.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_fname.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_lname.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_course.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Pencil-icon.png"))); // NOI18N
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -187,16 +208,16 @@ public class course_user extends javax.swing.JFrame {
                                     .addComponent(jLabel6))
                                 .addGap(36, 36, 36)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
+                                    .addComponent(in_rid)
+                                    .addComponent(in_fname)
+                                    .addComponent(in_lname)
+                                    .addComponent(in_course, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(94, 94, 94)
                                 .addComponent(btn_delete)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_edit)))))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,19 +235,19 @@ public class course_user extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(in_rid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(in_fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(in_lname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(in_course, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_edit, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
@@ -248,6 +269,79 @@ public class course_user extends javax.swing.JFrame {
                 close();
         
     }//GEN-LAST:event_btn_menuActionPerformed
+
+    private void showcourseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showcourseMouseMoved
+        // TODO add your handling code here:
+           DefaultTableModel model = (DefaultTableModel) showcourse.getModel();
+ // U_id=(model.getValueAt(Table_Admin.getSelectedRow(),0).toString());
+    in_rid.setText(model.getValueAt(showcourse.getSelectedRow(),0).toString());
+    in_fname.setText(model.getValueAt(showcourse.getSelectedRow(),2).toString());
+    in_lname.setText(model.getValueAt(showcourse.getSelectedRow(),3).toString());
+    in_course.setText(model.getValueAt(showcourse.getSelectedRow(),4).toString());
+ 
+    }//GEN-LAST:event_showcourseMouseMoved
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        // TODO add your handling code here:
+        arm.EditRegister(Integer.valueOf(in_rid.getText()),Integer.valueOf(in_rid.getText()),Integer.valueOf(in_course.getText()));
+    }//GEN-LAST:event_btn_editActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        // TODO add your handling code here:
+        arm.DeleteRegister(Integer.valueOf(in_rid.getText()));
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+          DefaultTableModel model = (DefaultTableModel)showcourse.getModel();
+	
+        	//Header Sort
+		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
+		showcourse.setRowSorter(sorter);
+                Connection connect = null;
+		Statement stmt = null;
+		
+		try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    String urlConnection = "jdbc:mysql://127.0.0.1/npru_pool?useUnicode=true&characterEncoding=UTF-8";
+                    connect = DriverManager.getConnection ( urlConnection, "root", "" );
+                    stmt=connect.createStatement();
+			
+			String sql = "SELECT * FROM  user join register WHERE user.U_ID = register.U_ID ORDER BY user.U_ID ASC";
+			
+			ResultSet rec = stmt.executeQuery(sql);
+			int row = 0;
+			while((rec!=null) && (rec.next()))
+            {			
+				//model.addRow(new Object[0]);
+				model.setValueAt(rec.getString("register.R_ID"), row, 0);
+                                	model.setValueAt(rec.getString("U_ID"), row, 1);
+				model.setValueAt(rec.getString("U_Firstname"), row, 2);
+				model.setValueAt(rec.getString("U_Lastname"), row, 3);
+				model.setValueAt(rec.getString("register.R_Type"), row, 4);
+			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
+			//	model.setValueAt(rec.getFloat("Used"), row, 5);
+				row++;
+            }
+
+			rec.close();
+             
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
+		
+		try {
+			if(stmt != null) {
+				stmt.close();
+				connect.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }//GEN-LAST:event_formMouseMoved
 
     /**
      * @param args the command line arguments
@@ -289,6 +383,10 @@ public class course_user extends javax.swing.JFrame {
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_menu;
+    private javax.swing.JTextField in_course;
+    private javax.swing.JTextField in_fname;
+    private javax.swing.JTextField in_lname;
+    private javax.swing.JTextField in_rid;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -296,10 +394,6 @@ public class course_user extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTable showcourse;
     // End of variables declaration//GEN-END:variables
 }

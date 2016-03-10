@@ -5,17 +5,23 @@
  */
 package admin_form;
 
+import SystemNpruPool.CheckConnetDB;
 import static SystemNpruPool.ConnectDB.passwordDB;
 import static SystemNpruPool.ConnectDB.urlConnection;
 import static SystemNpruPool.ConnectDB.usernameDB;
 import SystemNpruPool_Admin.Admin;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import static java.lang.Thread.sleep;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -29,12 +35,14 @@ public class show_list_admin extends javax.swing.JFrame {
  Connection connect = null;
 		Statement stmt = null;
                 String sql;
+       
     /**
      * Creates new form show_list_admin
      */
     public show_list_admin() {
         initComponents();
-           DefaultTableModel model = (DefaultTableModel)Table_Admin.getModel();
+       
+          DefaultTableModel model = (DefaultTableModel)Table_Admin.getModel();
 	
         	//Header Sort
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
@@ -128,6 +136,11 @@ sorter.setSortKeys(null);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("แสดงรายชื่อผู้จัดการ");
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         Table_Admin.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         Table_Admin.setModel(new javax.swing.table.DefaultTableModel(
@@ -391,6 +404,63 @@ sorter.setSortKeys(null);
         // TODO add your handling code here:
         ad.DeleteAdmin(txt_username.getText());
     }//GEN-LAST:event_btn_deteteActionPerformed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+           DefaultTableModel model = (DefaultTableModel)Table_Admin.getModel();
+	
+        	//Header Sort
+		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
+		Table_Admin.setRowSorter(sorter);
+    
+
+//String expr = E_Uid.getText();
+//sorter.setRowFilter(RowFilter.regexFilter(expr));
+sorter.setSortKeys(null);
+           
+		
+		try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
+                    stmt=connect.createStatement();
+			
+			sql = "SELECT * FROM  admin  ORDER BY Admin_Username ASC";
+			
+			ResultSet rec = stmt.executeQuery(sql);
+			int row = 0;
+			while((rec!=null) && (rec.next()))
+            {			
+				//model.addRow(new Object[0]);
+				model.setValueAt(rec.getString("Admin_ID"), row, 0);
+				model.setValueAt(rec.getString("Admin_Username"), row, 1);
+				model.setValueAt(rec.getString("Admin_Password"), row, 2);
+				model.setValueAt(rec.getString("Admin_FirstName"), row, 3);
+                                model.setValueAt(rec.getString("Admin_LastName"), row, 4);
+                                model.setValueAt(rec.getString("Admin_CardID"), row, 5);
+                                model.setValueAt(rec.getString("Admin_Phonenumber"), row, 6);
+			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
+			//	model.setValueAt(rec.getFloat("Used"), row, 5);
+				row++;
+            }
+
+			rec.close();
+             
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
+		
+		try {
+			if(stmt != null) {
+				stmt.close();
+				connect.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }//GEN-LAST:event_formMouseMoved
                
     /**
      * @param args the command line arguments

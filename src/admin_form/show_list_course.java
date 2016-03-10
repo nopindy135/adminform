@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package admin_form;
 
 import static SystemNpruPool.ConnectDB.passwordDB;
 import static SystemNpruPool.ConnectDB.urlConnection;
 import static SystemNpruPool.ConnectDB.usernameDB;
-import SystemNpruPool_Admin.Admin_Paymentmode;
+import SystemNpruPool_Admin.Admin_Coursemode;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -20,25 +15,31 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
  * @author Boss
  */
-public class show_list_payment extends javax.swing.JFrame {
-    Admin_Paymentmode apm= new Admin_Paymentmode();
+public class show_list_course extends javax.swing.JFrame {
   Connection connect = null;
 		Statement stmt = null;
                 String sql;
+               Admin_Coursemode acm = new Admin_Coursemode();
     /**
-     * Creates new form show_list_payment
+     * Creates new form show_list_course
      */
-    public show_list_payment() {
+    public show_list_course() {
         initComponents();
-        DefaultTableModel model = (DefaultTableModel)Table_Payment.getModel();
+          DefaultTableModel model = (DefaultTableModel)Table_course.getModel();
 	
         	//Header Sort
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
-		Table_Payment.setRowSorter(sorter);
+		Table_course.setRowSorter(sorter);
     
 
 //String expr = E_Uid.getText();
@@ -51,22 +52,19 @@ sorter.setSortKeys(null);
                     connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
                     stmt=connect.createStatement();
 			
-			sql = "SELECT * FROM  payment join user WHERE payment.U_Id = user.U_ID  ORDER BY P_Id ASC";
+			sql = "SELECT * FROM  coues  ORDER BY C_ID ASC";
 			
 			ResultSet rec = stmt.executeQuery(sql);
 			int row = 0;
 			while((rec!=null) && (rec.next()))
             {			
 				model.addRow(new Object[0]);
-				model.setValueAt(rec.getString("payment.P_Id"), row, 0);
-                                model.setValueAt(rec.getString("payment.U_Id"), row, 1);
-                                model.setValueAt(rec.getString("user.U_Firstname"), row, 2);
-				model.setValueAt(rec.getString("user.U_Lastname"), row, 3);
-				model.setValueAt(rec.getString("payment.St_Id"), row, 4);
-				model.setValueAt(rec.getString("payment.P_Type"), row, 5);
-                                model.setValueAt(rec.getString("payment.P_Money"), row, 6);
-                                model.setValueAt(rec.getString("payment.P_Time"), row, 7);
-                                model.setValueAt(rec.getString("payment.P_Date"), row, 8);
+				model.setValueAt(rec.getString("C_ID"), row, 0);
+				model.setValueAt(rec.getString("C_Name"), row, 1);
+				model.setValueAt(rec.getString("C_Age_Limit"), row, 2);
+				model.setValueAt(rec.getString("C_Hour_Coues"), row, 3);
+                                model.setValueAt(rec.getString("C_Hour_of_Coues"), row, 4);
+                               
 			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
 			//	model.setValueAt(rec.getFloat("Used"), row, 5);
 				row++;
@@ -90,10 +88,11 @@ sorter.setSortKeys(null);
 			e.printStackTrace();
 		}
     }
-  public void close(){
+     public void close(){
         WindowEvent winclose = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winclose);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,7 +104,7 @@ sorter.setSortKeys(null);
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Table_Payment = new javax.swing.JTable();
+        Table_course = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -113,20 +112,18 @@ sorter.setSortKeys(null);
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         in_id = new javax.swing.JTextField();
-        in_iduser = new javax.swing.JTextField();
-        in_idstaff = new javax.swing.JTextField();
-        in_type = new javax.swing.JTextField();
-        in_money = new javax.swing.JTextField();
-        in_time = new javax.swing.JTextField();
-        in_date = new javax.swing.JTextField();
+        in_name = new javax.swing.JTextField();
+        in_limitage = new javax.swing.JTextField();
+        in_hour_coues = new javax.swing.JTextField();
+        in_c_hour_of_coues = new javax.swing.JTextField();
+        btn_add = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
+        btn_edit = new javax.swing.JButton();
         btn_menu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("แสดงประวัติการชำระเงิน");
+        setTitle("แสดงรายการคอร์สว่ายน้ำ");
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 formMouseMoved(evt);
@@ -134,66 +131,75 @@ sorter.setSortKeys(null);
         });
 
         jLabel1.setFont(new java.awt.Font("TH Sarabun New", 0, 24)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Pay-Per-Click-icon.png"))); // NOI18N
-        jLabel1.setText("แสดงประวัติการชำระเงิน");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Science-Classroom-icon (1).png"))); // NOI18N
+        jLabel1.setText("แสดงรายการคอร์สว่ายน้ำ");
 
-        Table_Payment.setModel(new javax.swing.table.DefaultTableModel(
+        Table_course.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "รหัสการชำระเงิน", "รหัสสมาชิก", "ชื่อ", "นามสกุล", "รหัสเจ้าหน้าที่", "ประเภทการชำระเงิน", "จำนวนเงิน", "เวลา", "วันที่"
+                "รหัสคอร์สว่ายน้ำ", "ชื่อคอร์สว่ายน้ำ", "อายุไม่เกิน", "เวลาเริ่มเรียน", "เวลาเลิกเรียน"
             }
         ));
-        Table_Payment.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        Table_course.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                Table_PaymentMouseMoved(evt);
+                Table_courseMouseMoved(evt);
             }
         });
-        jScrollPane1.setViewportView(Table_Payment);
+        jScrollPane1.setViewportView(Table_course);
 
         jLabel2.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel2.setText("แก้ไขประวัติการชำระเงิน");
+        jLabel2.setText("แก้ไขคอร์สว่ายน้ำ");
 
         jLabel3.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel3.setText("รหัสการชำระเงิน");
+        jLabel3.setText("รหัสคอร์สว่ายน้ำ");
 
         jLabel4.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel4.setText("รหัสสมาชิก");
+        jLabel4.setText("ชื่อคอร์สว่ายน้ำ");
 
         jLabel5.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel5.setText("รหัสเจ้าหน้าที่");
+        jLabel5.setText("อายุไม่เกิน");
 
         jLabel6.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel6.setText("ประเภทการชำระเงิน");
+        jLabel6.setText("เวลาเริ่มเรียน");
 
         jLabel7.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel7.setText("จำนวนเงิน");
-
-        jLabel8.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel8.setText("เวลา");
-
-        jLabel9.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel9.setText("วันที่");
+        jLabel7.setText("เวลาเลิกเรียน");
 
         in_id.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                in_idActionPerformed(evt);
+            }
+        });
 
-        in_iduser.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_name.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        in_idstaff.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_limitage.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        in_type.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_hour_coues.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        in_money.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_c_hour_of_coues.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        in_time.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-
-        in_date.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add-contact-icon.png"))); // NOI18N
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
 
         btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_deleteActionPerformed(evt);
+            }
+        });
+
+        btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Pencil-icon.png"))); // NOI18N
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
             }
         });
 
@@ -204,9 +210,9 @@ sorter.setSortKeys(null);
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
+                        .addGap(90, 90, 90)
                         .addComponent(jLabel2)
-                        .addGap(0, 82, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -214,23 +220,23 @@ sorter.setSortKeys(null);
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(in_id)
-                            .addComponent(in_iduser)
-                            .addComponent(in_idstaff)
-                            .addComponent(in_type)
-                            .addComponent(in_money)
-                            .addComponent(in_time)
-                            .addComponent(in_date)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addComponent(in_name)
+                            .addComponent(in_limitage)
+                            .addComponent(in_hour_coues)
+                            .addComponent(in_c_hour_of_coues))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(btn_add)
+                .addGap(18, 18, 18)
+                .addComponent(btn_delete)
+                .addGap(18, 18, 18)
+                .addComponent(btn_edit)
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,34 +246,29 @@ sorter.setSortKeys(null);
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(in_id, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(in_id, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(in_iduser, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(in_name, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(in_idstaff, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(in_limitage, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(in_type, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(in_hour_coues, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(in_money, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(in_time, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(in_date, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(in_c_hour_of_coues, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_add, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(btn_delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         btn_menu.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
@@ -285,75 +286,85 @@ sorter.setSortKeys(null);
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(346, 346, 346)
-                            .addComponent(jLabel1)
-                            .addGap(341, 341, 341))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(btn_menu)
-                            .addGap(344, 344, 344)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 796, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 976, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(btn_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(310, 310, 310)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(36, 36, 36))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(292, 292, 292)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        // TODO add your handling code here:
+        acm.AddCourse(Integer.valueOf(in_id.getText()),in_name.getText(), Integer.valueOf(in_limitage.getText())
+                ,in_hour_coues.getText(),in_c_hour_of_coues.getText());
+    }//GEN-LAST:event_btn_addActionPerformed
+
+    private void in_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_in_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_in_idActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        // TODO add your handling code here:
+        acm.DeleteCourse(Integer.valueOf(in_id.getText()));
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        // TODO add your handling code here:
+        acm.EditCourse(Integer.valueOf(in_id.getText()),in_name.getText(), Integer.valueOf(in_limitage.getText())
+                ,in_hour_coues.getText(),in_c_hour_of_coues.getText());
+    }//GEN-LAST:event_btn_editActionPerformed
+
+    private void Table_courseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table_courseMouseMoved
+        // TODO add your handling code here:
+         DefaultTableModel model = (DefaultTableModel) Table_course.getModel();
+ // U_id=(model.getValueAt(Table_Admin.getSelectedRow(),0).toString());
+    in_id.setText(model.getValueAt(Table_course.getSelectedRow(),0).toString());
+    in_name.setText(model.getValueAt(Table_course.getSelectedRow(),1).toString());
+    in_limitage.setText(model.getValueAt(Table_course.getSelectedRow(),2).toString());
+    in_hour_coues.setText(model.getValueAt(Table_course.getSelectedRow(),3).toString());
+    in_c_hour_of_coues.setText(model.getValueAt(Table_course.getSelectedRow(),4).toString());
+    }//GEN-LAST:event_Table_courseMouseMoved
+
     private void btn_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuActionPerformed
         // TODO add your handling code here:
-         user u = new user();
+          user u = new user();
         u.setVisible(true);
         close();
     }//GEN-LAST:event_btn_menuActionPerformed
 
-    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        // TODO add your handling code here:
-        apm.DeletePayment(Integer.valueOf(in_id.getText()));
-    }//GEN-LAST:event_btn_deleteActionPerformed
-
-    private void Table_PaymentMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table_PaymentMouseMoved
-        // TODO add your handling code here:
-           DefaultTableModel model = (DefaultTableModel) Table_Payment.getModel();
- // U_id=(model.getValueAt(Table_Admin.getSelectedRow(),0).toString());
-      in_id.setText(model.getValueAt(Table_Payment.getSelectedRow(),0).toString());
-     in_iduser.setText(model.getValueAt(Table_Payment.getSelectedRow(),1).toString());
-      in_idstaff.setText(model.getValueAt(Table_Payment.getSelectedRow(),4).toString());
-  //  E_name.setText(model.getValueAt(showcourse.getSelectedRow(),1).toString());
-   // E_lastname.setText(model.getValueAt(showcourse.getSelectedRow(),2).toString());
-    in_type.setText(model.getValueAt(Table_Payment.getSelectedRow(),5).toString());
-    in_money.setText(model.getValueAt(Table_Payment.getSelectedRow(),6).toString());
-    in_time.setText(model.getValueAt(Table_Payment.getSelectedRow(),7).toString());
-    in_date.setText(model.getValueAt(Table_Payment.getSelectedRow(),8).toString());
-    }//GEN-LAST:event_Table_PaymentMouseMoved
-
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         // TODO add your handling code here:
-          DefaultTableModel model = (DefaultTableModel)Table_Payment.getModel();
+          DefaultTableModel model = (DefaultTableModel)Table_course.getModel();
 	
         	//Header Sort
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
-		Table_Payment.setRowSorter(sorter);
+		Table_course.setRowSorter(sorter);
     
 
 //String expr = E_Uid.getText();
@@ -366,22 +377,19 @@ sorter.setSortKeys(null);
                     connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
                     stmt=connect.createStatement();
 			
-			sql = "SELECT * FROM  payment join user WHERE payment.U_Id = user.U_ID  ORDER BY P_Id ASC";
+			sql = "SELECT * FROM  coues  ORDER BY C_ID ASC";
 			
 			ResultSet rec = stmt.executeQuery(sql);
 			int row = 0;
 			while((rec!=null) && (rec.next()))
             {			
 				//model.addRow(new Object[0]);
-				model.setValueAt(rec.getString("payment.P_Id"), row, 0);
-                                model.setValueAt(rec.getString("payment.U_Id"), row, 1);
-                                model.setValueAt(rec.getString("user.U_Firstname"), row, 2);
-				model.setValueAt(rec.getString("user.U_Lastname"), row, 3);
-				model.setValueAt(rec.getString("payment.St_Id"), row, 4);
-				model.setValueAt(rec.getString("payment.P_Type"), row, 5);
-                                model.setValueAt(rec.getString("payment.P_Money"), row, 6);
-                                model.setValueAt(rec.getString("payment.P_Time"), row, 7);
-                                model.setValueAt(rec.getString("payment.P_Date"), row, 8);
+				model.setValueAt(rec.getString("C_ID"), row, 0);
+				model.setValueAt(rec.getString("C_Name"), row, 1);
+				model.setValueAt(rec.getString("C_Age_Limit"), row, 2);
+				model.setValueAt(rec.getString("C_Hour_Coues"), row, 3);
+                                model.setValueAt(rec.getString("C_Hour_of_Coues"), row, 4);
+                               
 			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
 			//	model.setValueAt(rec.getFloat("Used"), row, 5);
 				row++;
@@ -423,35 +431,35 @@ sorter.setSortKeys(null);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(show_list_payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(show_list_course.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(show_list_payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(show_list_course.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(show_list_payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(show_list_course.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(show_list_payment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(show_list_course.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new show_list_payment().setVisible(true);
+                new show_list_course().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Table_Payment;
+    private javax.swing.JTable Table_course;
+    private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_menu;
-    private javax.swing.JTextField in_date;
+    private javax.swing.JTextField in_c_hour_of_coues;
+    private javax.swing.JTextField in_hour_coues;
     private javax.swing.JTextField in_id;
-    private javax.swing.JTextField in_idstaff;
-    private javax.swing.JTextField in_iduser;
-    private javax.swing.JTextField in_money;
-    private javax.swing.JTextField in_time;
-    private javax.swing.JTextField in_type;
+    private javax.swing.JTextField in_limitage;
+    private javax.swing.JTextField in_name;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -459,8 +467,6 @@ sorter.setSortKeys(null);
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

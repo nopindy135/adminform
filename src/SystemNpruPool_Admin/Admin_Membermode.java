@@ -75,11 +75,11 @@ public class Admin_Membermode {
                         connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
 			stmt = connect.createStatement();
                         String sql = "UPDATE member " +
-					"SET M_Id = '" + mid + "' " +
-                                "SET U_ID = '" + uid + "' " +
-                                "SET M_Type = '" + type + "' " +
-                                "SET M_Start = '" + start + "' " +
-                                "SET M_End = '" + end + "' " +
+					
+                                "SET , = '" + uid + "' " +
+                                "SET , = '" + type + "' " +
+                                "SET , = '" + start + "' " +
+                                "SET , = '" + end + "' " +
 					" WHERE U_ID = '" + uid + "' ";
              stmt.execute(sql);
             

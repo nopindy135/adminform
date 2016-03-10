@@ -113,6 +113,11 @@ User us = new User();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("แสดงประวัติผู้เข้าใช้งานสระว่ายน้ำ");
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
 
         Table_History_Use.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         Table_History_Use.setModel(new javax.swing.table.DefaultTableModel(
@@ -274,6 +279,57 @@ User us = new User();
       in_type.setText(model.getValueAt(Table_History_Use.getSelectedRow(),3).toString());
    
     }//GEN-LAST:event_Table_History_UseMouseMoved
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+        	DefaultTableModel model = (DefaultTableModel)Table_History_Use.getModel();
+	
+        	//Header Sort
+		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
+		Table_History_Use.setRowSorter(sorter);
+                Connection connect = null;
+		Statement stmt = null;
+		
+		try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    String urlConnection = "jdbc:mysql://127.0.0.1/npru_pool?useUnicode=true&characterEncoding=UTF-8";
+                    connect = DriverManager.getConnection ( urlConnection, "root", "" );
+                    stmt=connect.createStatement();
+			
+			String sql = "SELECT * FROM  user join payment WHERE user.U_ID = payment.U_Id ORDER BY user.U_ID ASC";
+			
+			ResultSet rec = stmt.executeQuery(sql);
+			int row = 0;
+			while((rec!=null) && (rec.next()))
+            {			
+				//model.addRow(new Object[0]);
+				model.setValueAt(rec.getString("U_ID"), row, 0);
+				model.setValueAt(rec.getString("U_Firstname"), row, 1);
+				model.setValueAt(rec.getString("U_Lastname"), row, 2);
+				model.setValueAt(rec.getString("U_Type"), row, 3);
+			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
+			//	model.setValueAt(rec.getFloat("Used"), row, 5);
+				row++;
+            }
+
+			rec.close();
+             
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			e.printStackTrace();
+		}
+		
+		try {
+			if(stmt != null) {
+				stmt.close();
+				connect.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }//GEN-LAST:event_formMouseMoved
 
     /**
      * @param args the command line arguments

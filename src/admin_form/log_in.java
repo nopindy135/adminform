@@ -9,7 +9,13 @@ import SystemNpruPool.CheckConnetDB;
 import SystemNpruPool_Admin.Admin;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import static java.lang.Thread.sleep;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -20,15 +26,46 @@ public class log_in extends javax.swing.JFrame {
     private user user;
     /**
      * Creates new form log_in
-     */
+     */   public void CurrentDate(){
+         
+        
+        Thread clock = new Thread(){
+            public void run(){
+                for(;;){
+                    CheckConnetDB ccdb = new CheckConnetDB();
+                    if(ccdb.CheckConnect1() ==true){
+                    txt_server.setText("Online");
+                    }else{
+                         txt_server.setText("Offline");
+                    }
+                    Calendar cal = new GregorianCalendar();
+                    int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int second = cal.get(Calendar.SECOND);
+        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+        date_txt.setText("Date"+year+"/"+(month+1)+"/"+day);
+        txt_time.setText("Time "+hour+":"+(minute)+":"+second);
+                   // System.out.println("p");
+                    try{
+                    sleep(1000);
+                  
+                }   catch (InterruptedException ex) {
+                        Logger.getLogger(log_in.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
+        }
+                
+                };
+                clock.start();
+                }
+                        
+   
     public log_in() {
         initComponents();
-       
-         CheckConnetDB ccdb = new CheckConnetDB();
-        if(ccdb.CheckConnect1() == true){
-                txt_server.setText("Online");}
-        else{
-                txt_server.setText("Offline");}
+      CurrentDate();
+         
         
                     
     }
@@ -59,6 +96,8 @@ public class log_in extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_server = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        date_txt = new javax.swing.JLabel();
+        txt_time = new javax.swing.JLabel();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -154,12 +193,19 @@ public class log_in extends javax.swing.JFrame {
 
         jLabel7.setText("Server :");
 
+        date_txt.setText("jLabel8");
+
+        txt_time.setText("jLabel9");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(date_txt)
+                    .addComponent(txt_time))
+                .addGap(111, 111, 111)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
@@ -195,6 +241,12 @@ public class log_in extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(17, 17, 17))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(date_txt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_time)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -273,6 +325,7 @@ public class log_in extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel date_txt;
     private javax.swing.JPasswordField in_password;
     private javax.swing.JTextField in_username;
     private javax.swing.JButton jButton1;
@@ -287,5 +340,6 @@ public class log_in extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel txt_server;
+    private javax.swing.JLabel txt_time;
     // End of variables declaration//GEN-END:variables
 }

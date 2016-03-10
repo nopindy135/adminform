@@ -169,7 +169,7 @@ public class Admin_Usermode {
 		}
 		
 	}
-    public void EditUser(String u_Id,String name, String lastname, String address, String birthday, String cardId, int type, String tel) {
+    public void EditUser(int u_Id,String name, String lastname, String address, String birthday, String cardId, int type, String tel) {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 Connection connect = null;
                 Statement stmt = null;
@@ -180,12 +180,12 @@ public class Admin_Usermode {
 			stmt = connect.createStatement();
                         String sql = "UPDATE User " +
 					"SET U_Firstname = '" + name + "' " +
-                                "SET U_Lirstname = '" + lastname + "' " +
-                                "SET U_Address = '" + address + "' " +
-                                "SET U_Birthday = '" + birthday + "' " +
-                                "SET U_CardID = '" + cardId + "' " +
-                                "SET U_Type = '" + type + "' " +
-                                "SET U_Tel = '" + tel + "' " +
+                                ", U_Lastname = '" + lastname + "' " +
+                                ", U_Address = '" + address + "' " +
+                                ", U_Birthday = '" + birthday + "' " +
+                                ", U_CardID = '" + cardId + "' " +
+                                ", U_Type = '" + type + "' " +
+                                ", U_Tel = '" + tel + "' " +
 					" WHERE U_ID = '" + u_Id + "' ";
              stmt.execute(sql);
             

@@ -102,14 +102,14 @@ public class Admin_Staffmode {
                         connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
 			stmt = connect.createStatement();
                         String sql = "UPDATE staff " +
-					"SET St_ID = '" + id + "' " +
+					
                                 "SET St_Password = '" + password + "' " +
-                                "SET St_Name = '" + name + "' " +
-                                "SET St_Age = '" + age + "' " +
-                                "SET St_Workday = '" + workday + "' " +
-                                "SET St_Startdate = '" + start_date + "' " +
-                                "SET St_Start_Time = '" + start_time + "' " +
-                                "SET St_End_Time = '" + end_time + "' " +
+                                ", St_Name = '" + name + "' " +
+                                ", St_Age = '" + age + "' " +
+                                ", St_Workday = '" + workday + "' " +
+                                ", St_Startdate = '" + start_date + "' " +
+                                ", St_Start_Time = '" + start_time + "' " +
+                                ", St_End_Time = '" + end_time + "' " +
 					" WHERE St_ID = '" + id + "' ";
              stmt.execute(sql);
             
