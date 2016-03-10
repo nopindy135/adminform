@@ -8,6 +8,7 @@ package admin_form;
 import static SystemNpruPool.ConnectDB.passwordDB;
 import static SystemNpruPool.ConnectDB.urlConnection;
 import static SystemNpruPool.ConnectDB.usernameDB;
+import SystemNpruPool_Admin.Admin;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -24,6 +25,7 @@ import javax.swing.table.TableRowSorter;
  * @author Boss
  */
 public class show_list_admin extends javax.swing.JFrame {
+    Admin ad = new Admin();
  Connection connect = null;
 		Statement stmt = null;
                 String sql;
@@ -183,10 +185,25 @@ sorter.setSortKeys(null);
         });
 
         btn_Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add-contact-icon.png"))); // NOI18N
+        btn_Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AddActionPerformed(evt);
+            }
+        });
 
         btn_detete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
+        btn_detete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deteteActionPerformed(evt);
+            }
+        });
 
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Pencil-icon.png"))); // NOI18N
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel8.setText("รหัสบัตรประชาชน");
@@ -356,6 +373,24 @@ sorter.setSortKeys(null);
         u.setVisible(true);
         close();
     }//GEN-LAST:event_btn_menuActionPerformed
+
+    private void btn_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AddActionPerformed
+        // TODO add your handling code here:
+        ad.AddAdmin(Integer.valueOf(txt_aid.getText()),txt_username.getText(),txt_password.getText(),txt_fname.getText(),txt_lname.getText()
+                ,txt_cardid.getText(),txt_tel.getText());
+        
+    }//GEN-LAST:event_btn_AddActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        // TODO add your handling code here:
+                ad.EditAdmin(Integer.valueOf(txt_aid.getText()),txt_username.getText(),txt_password.getText(),txt_fname.getText(),txt_lname.getText()
+                ,txt_cardid.getText(),txt_tel.getText());
+    }//GEN-LAST:event_btn_editActionPerformed
+
+    private void btn_deteteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deteteActionPerformed
+        // TODO add your handling code here:
+        ad.DeleteAdmin(txt_username.getText());
+    }//GEN-LAST:event_btn_deteteActionPerformed
                
     /**
      * @param args the command line arguments

@@ -25,6 +25,7 @@ import javax.swing.table.TableRowSorter;
  * @author Boss
  */
 public class show_list_trainner extends javax.swing.JFrame {
+    Admin_Trainermode Atm = new Admin_Trainermode();
  Connection connect = null;
 		Statement stmt = null;
                 String sql;
@@ -174,6 +175,11 @@ sorter.setSortKeys(null);
         });
 
         btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel4.setText("อายุ");
@@ -197,6 +203,11 @@ sorter.setSortKeys(null);
         in_work_day.setToolTipText("");
 
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Pencil-icon.png"))); // NOI18N
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -346,7 +357,7 @@ sorter.setSortKeys(null);
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
-       Admin_Trainermode Atm = new Admin_Trainermode();
+       
        if(in_id.getText().equals("")){
            
        }
@@ -359,6 +370,19 @@ sorter.setSortKeys(null);
        }
        
     }//GEN-LAST:event_btn_addActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        // TODO add your handling code here:
+        Atm.DeleteTrainer(Integer.valueOf(in_id.getText()));
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        // TODO add your handling code here:
+            Admin_Trainermode Atm1 = new Admin_Trainermode();
+        Atm1.EditTrainer(Integer.valueOf(in_id.getText()),in_name.getText()
+                ,Integer.valueOf(in_age.getText()),in_cardid.getText(),in_tel.getText()
+                ,in_work_day.getText(),in_work_time.getText());
+    }//GEN-LAST:event_btn_editActionPerformed
 
     /**
      * @param args the command line arguments

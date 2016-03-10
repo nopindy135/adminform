@@ -25,6 +25,7 @@ import javax.swing.table.TableRowSorter;
  * @author Boss
  */
 public class show_list_staff extends javax.swing.JFrame {
+     Admin_Staffmode Asm = new Admin_Staffmode();
  Connection connect = null;
 		Statement stmt = null;
                 String sql;
@@ -60,8 +61,11 @@ sorter.setSortKeys(null);
 				model.setValueAt(rec.getString("St_ID"), row, 0);
 				model.setValueAt(rec.getString("St_Name"), row, 1);
 				model.setValueAt(rec.getString("St_Password"), row, 2);
-				model.setValueAt(rec.getString("St_Start_Time"), row, 3);
-                                model.setValueAt(rec.getString("St_End_Time"), row, 4);
+				model.setValueAt(rec.getString("St_Age"), row, 3);
+                                model.setValueAt(rec.getString("St_Workday"), row, 4);
+                                model.setValueAt(rec.getString("St_Startdate"), row, 5);
+                                model.setValueAt(rec.getString("St_Start_Time"), row, 6);
+                                model.setValueAt(rec.getString("St_End_Time"), row, 7);
                          
 			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
 			//	model.setValueAt(rec.getFloat("Used"), row, 5);
@@ -113,11 +117,11 @@ sorter.setSortKeys(null);
         btn_delete = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        in_age = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        in_work_day = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        in_start_day = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table_Staff = new javax.swing.JTable();
@@ -167,23 +171,33 @@ sorter.setSortKeys(null);
         });
 
         btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
 
         btn_edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Pencil-icon.png"))); // NOI18N
+        btn_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel8.setText("อายุ");
 
-        jTextField1.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_age.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel9.setText("วันทำงาน");
 
-        jTextField2.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_work_day.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel10.setText("วันเริ่มงาน");
 
-        jTextField3.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        in_start_day.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -212,9 +226,9 @@ sorter.setSortKeys(null);
                             .addComponent(in_password)
                             .addComponent(in_start_time)
                             .addComponent(in_end_time)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)))
+                            .addComponent(in_age)
+                            .addComponent(in_work_day)
+                            .addComponent(in_start_day)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,15 +259,15 @@ sorter.setSortKeys(null);
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(in_age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(in_work_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(in_start_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -351,8 +365,11 @@ sorter.setSortKeys(null);
       in_id.setText(model.getValueAt(Table_Staff.getSelectedRow(),0).toString());
       in_name.setText(model.getValueAt(Table_Staff.getSelectedRow(),1).toString());
       in_password.setText(model.getValueAt(Table_Staff.getSelectedRow(),2).toString());
-      in_start_time.setText(model.getValueAt(Table_Staff.getSelectedRow(),3).toString());
-      in_end_time.setText(model.getValueAt(Table_Staff.getSelectedRow(),4).toString());
+      in_age.setText(model.getValueAt(Table_Staff.getSelectedRow(),3).toString());
+      in_work_day.setText(model.getValueAt(Table_Staff.getSelectedRow(),4).toString());
+      in_start_day.setText(model.getValueAt(Table_Staff.getSelectedRow(),5).toString());
+      in_start_time.setText(model.getValueAt(Table_Staff.getSelectedRow(),6).toString());
+      in_end_time.setText(model.getValueAt(Table_Staff.getSelectedRow(),7).toString());
    
    
     }//GEN-LAST:event_Table_StaffMouseMoved
@@ -366,9 +383,21 @@ sorter.setSortKeys(null);
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
-        Admin_Staffmode Asm = new Admin_Staffmode();
-       // Asm.AddStaff(Integer.valueOf(in_id.getText()),in_password.getText(),in_name.getText(),in_age.getText(), sql, sql, sql, sql);
+        //Admin_Staffmode Asm = new Admin_Staffmode();
+        Asm.AddStaff(Integer.valueOf(in_id.getText()),in_password.getText(),in_name.getText(),in_age.getText(),in_work_day.getText()
+                ,in_start_day.getText(),in_start_time.getText(),in_end_time.getText());
     }//GEN-LAST:event_btn_addActionPerformed
+
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
+        // TODO add your handling code here:
+        Asm.DeleteStaff(Integer.valueOf(in_id.getText()));
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
+        // TODO add your handling code here:
+        Asm.EditStaff(Integer.valueOf(in_id.getText()),in_password.getText(),in_name.getText(),in_age.getText(),in_work_day.getText()
+                ,in_start_day.getText(),in_start_time.getText(),in_end_time.getText());
+    }//GEN-LAST:event_btn_editActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,11 +440,14 @@ sorter.setSortKeys(null);
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_menu;
+    private javax.swing.JTextField in_age;
     private javax.swing.JTextField in_end_time;
     private javax.swing.JTextField in_id;
     private javax.swing.JTextField in_name;
     private javax.swing.JTextField in_password;
+    private javax.swing.JTextField in_start_day;
     private javax.swing.JTextField in_start_time;
+    private javax.swing.JTextField in_work_day;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -428,8 +460,5 @@ sorter.setSortKeys(null);
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
