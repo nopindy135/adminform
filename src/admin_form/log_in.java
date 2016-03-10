@@ -76,6 +76,7 @@ public class log_in extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("ระบบผู้จัดการ( Admin ) ระบบบริการสระว่ายน้ำ");
 
         jLabel1.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel1.setText("ระบบผู้จัดการ (Admin) ระบบบริการสระว่ายน้ำมหาวิทยาลัยราชภัฏนครปฐม");

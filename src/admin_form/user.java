@@ -57,6 +57,7 @@ Staff st = new Staff();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("เมนูหลัก");
 
         jButton4.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Log-Out-icon.png"))); // NOI18N

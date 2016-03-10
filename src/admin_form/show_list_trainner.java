@@ -127,6 +127,7 @@ sorter.setSortKeys(null);
         btn_menu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("แสดงรายชื่อผู้สอน");
 
         Table_Trainner.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

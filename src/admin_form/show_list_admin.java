@@ -125,6 +125,7 @@ sorter.setSortKeys(null);
         btn_menu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("แสดงรายชื่อผู้จัดการ");
 
         Table_Admin.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         Table_Admin.setModel(new javax.swing.table.DefaultTableModel(
@@ -204,7 +205,7 @@ sorter.setSortKeys(null);
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addGap(61, 61, 61)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

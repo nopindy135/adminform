@@ -124,6 +124,7 @@ sorter.setSortKeys(null);
         btn_menu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("แสดงรายชื่อเจ้าหน้าที่");
 
         jLabel2.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel2.setText("แก้ไขข้อมูลเจ้าหน้าที่ ( Staff )");
@@ -234,7 +235,6 @@ sorter.setSortKeys(null);
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(in_id)
                         .addGap(3, 3, 3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(in_name, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))

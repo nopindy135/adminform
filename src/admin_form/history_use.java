@@ -112,14 +112,12 @@ User us = new User();
         btn_edit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("แสดงประวัติผู้เข้าใช้งานสระว่ายน้ำ");
 
         Table_History_Use.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         Table_History_Use.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "รหัสสมาชิก", "ชื่อ", "นามสกุล", "ประเภทผู้ใช้งาน"
