@@ -18,9 +18,9 @@ import java.sql.Statement;
  * @author Godonlyknows
  */
 public interface ConnectDB {
-    String usernameDB = "root";
-    String passwordDB = "";
+    String usernameDB = "nprupooladmin";
+    String passwordDB = "1234";
    // Connection connect = null;
-    String urlConnection = "jdbc:mysql://127.0.0.1:3306/npru_pool?useUnicode=true&characterEncoding=UTF-8";
+    String urlConnection = "jdbc:mysql://192.168.43.242:3306/npru_pool?useUnicode=true&characterEncoding=UTF-8";
     
 }
