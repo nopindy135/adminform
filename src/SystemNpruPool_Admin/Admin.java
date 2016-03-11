@@ -20,7 +20,7 @@ import java.sql.Statement;
  */
 public class Admin {
     int admin_id;
-    String admin_username;
+    public static String  admin_username;
     String admin_password;
     String admin_firstname;
     String admin_lastname;
@@ -101,7 +101,8 @@ public class Admin {
 			ResultSet rec = stmt.executeQuery(sql);
                         
 			while((rec!=null) && (rec.next()))
-            {
+                        {
+                            setAdmin_username(user);
                 String chid = rec.getString("Admin_Username");
                 String chpass = rec.getString("Admin_Password");
                         if(chid.equals(user)  && pass.equals(chpass)){

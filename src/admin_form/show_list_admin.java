@@ -41,7 +41,8 @@ public class show_list_admin extends javax.swing.JFrame {
      */
     public show_list_admin() {
         initComponents();
-       
+          Admin a = new Admin();
+            out_user.setText(a.getAdmin_username());
           DefaultTableModel model = (DefaultTableModel)Table_Admin.getModel();
 	
         	//Header Sort
@@ -134,7 +135,7 @@ sorter.setSortKeys(null);
         txt_tel = new javax.swing.JTextField();
         btn_menu = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        out_user = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -328,9 +329,9 @@ sorter.setSortKeys(null);
         jLabel10.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel10.setText("สวัสดี : ");
 
-        jLabel11.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel11.setText("...................");
+        out_user.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        out_user.setForeground(new java.awt.Color(0, 0, 204));
+        out_user.setText("...................");
 
         jLabel12.setFont(new java.awt.Font("TH Sarabun New", 0, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 0, 0));
@@ -349,7 +350,7 @@ sorter.setSortKeys(null);
                         .addContainerGap()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel11)
+                        .addComponent(out_user)
                         .addGap(163, 163, 163)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
@@ -369,7 +370,7 @@ sorter.setSortKeys(null);
                     .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel10)
-                        .addComponent(jLabel11)))
+                        .addComponent(out_user)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -533,7 +534,6 @@ sorter.setSortKeys(null);
     private javax.swing.JButton btn_menu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -545,6 +545,7 @@ sorter.setSortKeys(null);
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel out_user;
     private javax.swing.JTextField txt_aid;
     private javax.swing.JTextField txt_cardid;
     private javax.swing.JTextField txt_fname;

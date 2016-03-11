@@ -5,6 +5,10 @@
  */
 package admin_form;
 
+import static SystemNpruPool.ConnectDB.passwordDB;
+import static SystemNpruPool.ConnectDB.urlConnection;
+import static SystemNpruPool.ConnectDB.usernameDB;
+import SystemNpruPool_Admin.Admin;
 import SystemNpruPool_Admin.Admin_Registermode;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -28,6 +32,8 @@ Admin_Registermode arm = new Admin_Registermode();
      */
     public course_user() {
         initComponents();
+           Admin a = new Admin();
+            out_user.setText(a.getAdmin_username());
         DefaultTableModel model = (DefaultTableModel)showcourse.getModel();
 	
         	//Header Sort
@@ -37,9 +43,9 @@ Admin_Registermode arm = new Admin_Registermode();
 		Statement stmt = null;
 		
 		try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String urlConnection = "jdbc:mysql://127.0.0.1/npru_pool?useUnicode=true&characterEncoding=UTF-8";
-                    connect = DriverManager.getConnection ( urlConnection, "root", "" );
+              Class.forName("com.mysql.jdbc.Driver");
+                    connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
+                    stmt=connect.createStatement();
                     stmt=connect.createStatement();
 			
 			String sql = "SELECT * FROM  user join register WHERE user.U_ID = register.U_ID ORDER BY user.U_ID ASC";
@@ -108,7 +114,7 @@ Admin_Registermode arm = new Admin_Registermode();
         btn_edit = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        out_user = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("รายชื่อผู้เข้าเรียนคอร์สว่ายน้ำ");
@@ -190,9 +196,9 @@ Admin_Registermode arm = new Admin_Registermode();
 
         jLabel8.setText("สวัสดี : ");
 
-        jLabel9.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel9.setText("..............");
+        out_user.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        out_user.setForeground(new java.awt.Color(0, 0, 204));
+        out_user.setText("..............");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,7 +210,7 @@ Admin_Registermode arm = new Admin_Registermode();
                         .addContainerGap()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
+                        .addComponent(out_user)
                         .addGap(55, 55, 55)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
@@ -249,7 +255,7 @@ Admin_Registermode arm = new Admin_Registermode();
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9))))
+                            .addComponent(out_user))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -425,8 +431,8 @@ Admin_Registermode arm = new Admin_Registermode();
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel out_user;
     private javax.swing.JTable showcourse;
     // End of variables declaration//GEN-END:variables
 }

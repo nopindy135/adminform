@@ -5,7 +5,11 @@
  */
 package admin_form;
 
+import static SystemNpruPool.ConnectDB.passwordDB;
+import static SystemNpruPool.ConnectDB.urlConnection;
+import static SystemNpruPool.ConnectDB.usernameDB;
 import SystemNpruPool.User;
+import SystemNpruPool_Admin.Admin;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
@@ -29,10 +33,11 @@ User us = new User();
      */
     public history_use() {
         initComponents();
-        
+        Admin a = new Admin();
+            out_user.setText(a.getAdmin_username());
        // us.ShowUser();
         	DefaultTableModel model = (DefaultTableModel)Table_History_Use.getModel();
-	
+                
         	//Header Sort
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
 		Table_History_Use.setRowSorter(sorter);
@@ -40,10 +45,10 @@ User us = new User();
 		Statement stmt = null;
 		
 		try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String urlConnection = "jdbc:mysql://127.0.0.1/npru_pool?useUnicode=true&characterEncoding=UTF-8";
-                    connect = DriverManager.getConnection ( urlConnection, "root", "" );
+                   Class.forName("com.mysql.jdbc.Driver");
+                    connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
                     stmt=connect.createStatement();
+                
 			
 			String sql = "SELECT * FROM  user join payment WHERE user.U_ID = payment.U_Id ORDER BY user.U_ID ASC";
 			
@@ -112,7 +117,7 @@ User us = new User();
         btn_edit = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        out_user = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("แสดงประวัติผู้เข้าใช้งานสระว่ายน้ำ");
@@ -188,9 +193,9 @@ User us = new User();
 
         jLabel8.setText("สวัสดี : ");
 
-        jLabel9.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel9.setText("..............");
+        out_user.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        out_user.setForeground(new java.awt.Color(0, 0, 204));
+        out_user.setText("..............");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,7 +207,7 @@ User us = new User();
                         .addContainerGap()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
+                        .addComponent(out_user)
                         .addGap(32, 32, 32)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
@@ -251,7 +256,7 @@ User us = new User();
                     .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(jLabel9)))
+                        .addComponent(out_user)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,7 +413,7 @@ User us = new User();
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel out_user;
     // End of variables declaration//GEN-END:variables
 }

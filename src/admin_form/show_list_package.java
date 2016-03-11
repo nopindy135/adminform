@@ -8,6 +8,7 @@ package admin_form;
 import static SystemNpruPool.ConnectDB.passwordDB;
 import static SystemNpruPool.ConnectDB.urlConnection;
 import static SystemNpruPool.ConnectDB.usernameDB;
+import SystemNpruPool_Admin.Admin;
 import SystemNpruPool_Admin.Admin_Membermode;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -38,6 +39,8 @@ Connection connect = null;
     }
     public show_list_package() {
         initComponents();
+                  Admin a = new Admin();
+            out_user.setText(a.getAdmin_username());
         DefaultTableModel model = (DefaultTableModel)Table_package.getModel();
 	
         	//Header Sort
@@ -124,7 +127,7 @@ sorter.setSortKeys(null);
         btn_edit = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        out_user = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -285,9 +288,9 @@ sorter.setSortKeys(null);
         jLabel6.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel6.setText("สวัสดี : ");
 
-        jLabel10.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel10.setText("..................");
+        out_user.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        out_user.setForeground(new java.awt.Color(0, 51, 204));
+        out_user.setText("..................");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -305,7 +308,7 @@ sorter.setSortKeys(null);
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel6)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel10)
+                            .addComponent(out_user)
                             .addGap(168, 168, 168)
                             .addComponent(jLabel1))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -325,7 +328,7 @@ sorter.setSortKeys(null);
                             .addComponent(jLabel1)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel6)
-                                .addComponent(jLabel10)))
+                                .addComponent(out_user)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -480,7 +483,6 @@ sorter.setSortKeys(null);
     private javax.swing.JTextField in_start_date;
     private javax.swing.JTextField in_uid;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -491,5 +493,6 @@ sorter.setSortKeys(null);
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel out_user;
     // End of variables declaration//GEN-END:variables
 }

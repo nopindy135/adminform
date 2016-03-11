@@ -6,6 +6,7 @@
 package admin_form;
 
 import SystemNpruPool.Staff;
+import SystemNpruPool_Admin.Admin;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 
@@ -21,6 +22,8 @@ Staff st = new Staff();
      */
     public user() {
         initComponents();
+                  Admin a = new Admin();
+            out_user.setText(a.getAdmin_username());
         System.out.println("st id on user befo = "+st.getSt_Id());
         st.CheckStaff(st.getSt_Id());
           System.out.println("st id on user af = "+st.getSt_Id());
@@ -55,7 +58,7 @@ Staff st = new Staff();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        out_user = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("เมนูหลัก");
@@ -238,9 +241,9 @@ Staff st = new Staff();
         jLabel2.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel2.setText("สวัสดี : ");
 
-        jLabel3.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel3.setText("..............");
+        out_user.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
+        out_user.setForeground(new java.awt.Color(0, 51, 255));
+        out_user.setText("..............");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,7 +264,7 @@ Staff st = new Staff();
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
+                        .addComponent(out_user)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addGap(190, 190, 190)
@@ -278,7 +281,7 @@ Staff st = new Staff();
                         .addComponent(jLabel4))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
-                        .addComponent(jLabel3)))
+                        .addComponent(out_user)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,11 +407,11 @@ Staff st = new Staff();
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel out_user;
     // End of variables declaration//GEN-END:variables
 }
