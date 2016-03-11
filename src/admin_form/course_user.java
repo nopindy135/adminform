@@ -46,7 +46,7 @@ Admin_Registermode arm = new Admin_Registermode();
               Class.forName("com.mysql.jdbc.Driver");
                     connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
                     stmt=connect.createStatement();
-                    stmt=connect.createStatement();
+                 //   stmt=connect.createStatement();
 			
 			String sql = "SELECT * FROM  user join register WHERE user.U_ID = register.U_ID ORDER BY user.U_ID ASC";
 			
@@ -56,10 +56,10 @@ Admin_Registermode arm = new Admin_Registermode();
             {			
 				model.addRow(new Object[0]);
 				model.setValueAt(rec.getString("register.R_ID"), row, 0);
-                                	model.setValueAt(rec.getString("U_ID"), row, 1);
-				model.setValueAt(rec.getString("U_Firstname"), row, 2);
-				model.setValueAt(rec.getString("U_Lastname"), row, 3);
-				model.setValueAt(rec.getString("register.R_Type"), row, 4);
+                                model.setValueAt(rec.getString("register.U_ID"), row, 1);
+				model.setValueAt(rec.getString("user.U_Firstname"), row, 2);
+				model.setValueAt(rec.getString("user.U_Lastname"), row, 3);
+				model.setValueAt(rec.getString("register.C_ID"), row, 4);
 			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
 			//	model.setValueAt(rec.getFloat("Used"), row, 5);
 				row++;
@@ -104,17 +104,15 @@ Admin_Registermode arm = new Admin_Registermode();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         in_rid = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        in_fname = new javax.swing.JTextField();
-        in_lname = new javax.swing.JTextField();
         in_course = new javax.swing.JTextField();
         btn_delete = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         out_user = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        in_uid = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("รายชื่อผู้เข้าเรียนคอร์สว่ายน้ำ");
@@ -161,18 +159,8 @@ Admin_Registermode arm = new Admin_Registermode();
 
         in_rid.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel4.setText("ชื่อ");
-
-        jLabel5.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel5.setText("นามสกุล");
-
         jLabel6.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel6.setText("ประเภทคอร์ส");
-
-        in_fname.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-
-        in_lname.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         in_course.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
@@ -199,6 +187,10 @@ Admin_Registermode arm = new Admin_Registermode();
         out_user.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         out_user.setForeground(new java.awt.Color(0, 0, 204));
         out_user.setText("..............");
+
+        jLabel9.setText("รหัสสมาชิก");
+
+        in_uid.setText("รหัสสมาชิก");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,16 +219,14 @@ Admin_Registermode arm = new Admin_Registermode();
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel9))
                                 .addGap(36, 36, 36)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(in_rid)
-                                    .addComponent(in_fname)
-                                    .addComponent(in_lname)
-                                    .addComponent(in_course, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)))
+                                    .addComponent(in_course, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                                    .addComponent(in_uid)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(94, 94, 94)
                                 .addComponent(btn_delete)
@@ -272,15 +262,11 @@ Admin_Registermode arm = new Admin_Registermode();
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(in_rid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(in_fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(in_lname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                            .addComponent(jLabel9)
+                            .addComponent(in_uid))
+                        .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(in_course, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -311,15 +297,15 @@ Admin_Registermode arm = new Admin_Registermode();
            DefaultTableModel model = (DefaultTableModel) showcourse.getModel();
  // U_id=(model.getValueAt(Table_Admin.getSelectedRow(),0).toString());
     in_rid.setText(model.getValueAt(showcourse.getSelectedRow(),0).toString());
-    in_fname.setText(model.getValueAt(showcourse.getSelectedRow(),2).toString());
-    in_lname.setText(model.getValueAt(showcourse.getSelectedRow(),3).toString());
+    in_uid.setText(model.getValueAt(showcourse.getSelectedRow(),1).toString());
+   // in_lname.setText(model.getValueAt(showcourse.getSelectedRow(),3).toString());
     in_course.setText(model.getValueAt(showcourse.getSelectedRow(),4).toString());
  
     }//GEN-LAST:event_showcourseMouseMoved
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         // TODO add your handling code here:
-        arm.EditRegister(Integer.valueOf(in_rid.getText()),Integer.valueOf(in_rid.getText()),Integer.valueOf(in_course.getText()));
+        arm.EditRegister(Integer.valueOf(in_rid.getText()),Integer.valueOf(in_uid.getText()),Integer.valueOf(in_course.getText()));
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -338,10 +324,10 @@ Admin_Registermode arm = new Admin_Registermode();
 		Statement stmt = null;
 		
 		try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    String urlConnection = "jdbc:mysql://127.0.0.1/npru_pool?useUnicode=true&characterEncoding=UTF-8";
-                    connect = DriverManager.getConnection ( urlConnection, "root", "" );
+                      Class.forName("com.mysql.jdbc.Driver");
+                    connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
                     stmt=connect.createStatement();
+              //      stmt=connect.createStatement();
 			
 			String sql = "SELECT * FROM  user join register WHERE user.U_ID = register.U_ID ORDER BY user.U_ID ASC";
 			
@@ -351,10 +337,10 @@ Admin_Registermode arm = new Admin_Registermode();
             {			
 				//model.addRow(new Object[0]);
 				model.setValueAt(rec.getString("register.R_ID"), row, 0);
-                                	model.setValueAt(rec.getString("U_ID"), row, 1);
-				model.setValueAt(rec.getString("U_Firstname"), row, 2);
-				model.setValueAt(rec.getString("U_Lastname"), row, 3);
-				model.setValueAt(rec.getString("register.R_Type"), row, 4);
+                                model.setValueAt(rec.getString("register.U_ID"), row, 1);
+				model.setValueAt(rec.getString("user.U_Firstname"), row, 2);
+				model.setValueAt(rec.getString("user.U_Lastname"), row, 3);
+				model.setValueAt(rec.getString("register.C_ID"), row, 4);
 			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
 			//	model.setValueAt(rec.getFloat("Used"), row, 5);
 				row++;
@@ -420,17 +406,15 @@ Admin_Registermode arm = new Admin_Registermode();
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_menu;
     private javax.swing.JTextField in_course;
-    private javax.swing.JTextField in_fname;
-    private javax.swing.JTextField in_lname;
     private javax.swing.JTextField in_rid;
+    private javax.swing.JLabel in_uid;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel out_user;
     private javax.swing.JTable showcourse;
