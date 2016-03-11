@@ -191,15 +191,15 @@ public class log_in extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("TH Sarabun New", 0, 24)); // NOI18N
         jLabel2.setText("กรุณาเข้าสู่ระบบ (Please Log-in)");
 
-        txt_server.setText("..");
+        txt_server.setText("OFFLINE");
 
         jLabel7.setText("Server :");
 
         date_txt.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        date_txt.setText("jLabel8");
+        date_txt.setText("DATE");
 
         txt_time.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        txt_time.setText("jLabel9");
+        txt_time.setText("TIME");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
