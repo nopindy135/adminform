@@ -76,11 +76,11 @@ public class Admin_Membermode {
 			stmt = connect.createStatement();
                         String sql = "UPDATE member " +
 					
-                                "SET , = '" + uid + "' " +
-                                "SET , = '" + type + "' " +
-                                "SET , = '" + start + "' " +
-                                "SET , = '" + end + "' " +
-					" WHERE U_ID = '" + uid + "' ";
+                               
+                                "SET M_Type  = '" + type + "' " +
+                                " , M_Start = '" + start + "' " +
+                                " , M_End= '" + end + "' " +
+					" WHERE M_Id = '" + mid + "' ";
              stmt.execute(sql);
             
              System.out.println("Record Update Member Successfully");

@@ -117,14 +117,13 @@ sorter.setSortKeys(null);
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        in_id = new javax.swing.JTextField();
-        in_uid = new javax.swing.JTextField();
         in_name = new javax.swing.JTextField();
         in_start_date = new javax.swing.JTextField();
         in_end_time = new javax.swing.JTextField();
-        btn_add = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
         btn_edit = new javax.swing.JButton();
+        in_uid = new javax.swing.JLabel();
+        in_id = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         out_user = new javax.swing.JLabel();
@@ -183,22 +182,11 @@ sorter.setSortKeys(null);
         jLabel9.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel9.setText("วันหมดอายุ");
 
-        in_id.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-
-        in_uid.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-
         in_name.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         in_start_date.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         in_end_time.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-
-        btn_add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add-contact-icon.png"))); // NOI18N
-        btn_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addActionPerformed(evt);
-            }
-        });
 
         btn_delete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/Button-Close-icon.png"))); // NOI18N
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +202,10 @@ sorter.setSortKeys(null);
             }
         });
 
+        in_uid.setText("..");
+
+        in_id.setText("..");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -223,7 +215,7 @@ sorter.setSortKeys(null);
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 56, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -234,15 +226,16 @@ sorter.setSortKeys(null);
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(in_id)
-                            .addComponent(in_uid)
                             .addComponent(in_name)
                             .addComponent(in_start_date)
-                            .addComponent(in_end_time)))
+                            .addComponent(in_end_time)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(in_uid)
+                                    .addComponent(in_id))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(41, Short.MAX_VALUE)
-                        .addComponent(btn_add)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_delete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_edit)))
@@ -256,11 +249,11 @@ sorter.setSortKeys(null);
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(in_id, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(in_id))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(in_uid, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(in_uid))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -275,8 +268,7 @@ sorter.setSortKeys(null);
                     .addComponent(in_end_time, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_add, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(btn_delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_delete, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                     .addComponent(btn_edit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -355,11 +347,6 @@ sorter.setSortKeys(null);
   
 
     }//GEN-LAST:event_Table_packageMouseMoved
-
-    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
-        // TODO add your handling code here:
-        amm.AddMember(Integer.valueOf(in_id.getText()), Integer.valueOf(in_uid.getText()),in_name.getText(),in_start_date.getText(),in_end_time.getText());
-    }//GEN-LAST:event_btn_addActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         // TODO add your handling code here:
@@ -473,15 +460,14 @@ sorter.setSortKeys(null);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Table_package;
-    private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_edit;
     private javax.swing.JButton btn_menu;
     private javax.swing.JTextField in_end_time;
-    private javax.swing.JTextField in_id;
+    private javax.swing.JLabel in_id;
     private javax.swing.JTextField in_name;
     private javax.swing.JTextField in_start_date;
-    private javax.swing.JTextField in_uid;
+    private javax.swing.JLabel in_uid;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

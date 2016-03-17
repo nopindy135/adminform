@@ -134,7 +134,7 @@ public class Admin {
     }
         public void ShowDetailAdmin(){
     }
-    public void AddAdmin(int id ,String username,
+    public void AddAdmin(String username,
                                   String password,
                                   String fname,
                                   String lname,
@@ -149,8 +149,8 @@ public class Admin {
                      connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
 			stmt = connect.createStatement();
 			String sql = "INSERT INTO admin " +
-					"(Admin_ID,Admin_Username,Admin_Password,Admin_FirstName,Admin_LastName,Admin_CardID,Admin_Phonenumber) " + 
-					"VALUES ('" + id + "','" + username + "','" + password + "'"
+					"(Admin_Username,Admin_Password,Admin_FirstName,Admin_LastName,Admin_CardID,Admin_Phonenumber) " + 
+					"VALUES ('" + username + "','" + password + "'"
                                 + "" +
 					",'" + fname + "','" + lname + "','" + cardid + "','" + phonenumber + "') ";
                          stmt.execute(sql);
@@ -174,7 +174,7 @@ public class Admin {
 		}
         
     }
-    public void EditAdmin(int id ,String username,
+    public void EditAdmin(String username,
                                   String password,
                                   String fname,
                                   String lname,

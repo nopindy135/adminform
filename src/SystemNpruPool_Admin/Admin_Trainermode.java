@@ -125,13 +125,13 @@ public class Admin_Trainermode {
                         connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
 			stmt = connect.createStatement();
                         String sql = "UPDATE trainer " +
-					"SET T_ID = '" + id + "' " +
+					
                                 "SET T_Name = '" + name + "' " +
-                                "SET T_Age = '" + age + "' " +
-                                "SET T_Code = '" + code + "' " +
-                                "SET T_Tel = '" + tel + "' " +
-                                   "SET T_Work_Date = '" + work_date + "' " +
-                                   "SET T_Work_Time = '" + work_time + "' " +
+                                ", T_Age = '" + age + "' " +
+                                ", T_Code = '" + code + "' " +
+                                ", T_Tel = '" + tel + "' " +
+                                   ", T_Work_Date = '" + work_date + "' " +
+                                   ", T_Work_Time = '" + work_time + "' " +
 					" WHERE T_ID = '" + id + "' ";
              stmt.execute(sql);
             

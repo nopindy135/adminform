@@ -41,7 +41,7 @@ public class show_list_admin extends javax.swing.JFrame {
      */
     public show_list_admin() {
         initComponents();
-          Admin a = new Admin();
+           Admin a = new Admin();
             out_user.setText(a.getAdmin_username());
           DefaultTableModel model = (DefaultTableModel)Table_Admin.getModel();
 	
@@ -60,20 +60,21 @@ sorter.setSortKeys(null);
                     connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
                     stmt=connect.createStatement();
 			
-			sql = "SELECT * FROM  admin  ORDER BY Admin_Username ASC";
+			sql = "SELECT * FROM  admin  ";
 			
 			ResultSet rec = stmt.executeQuery(sql);
 			int row = 0;
 			while((rec!=null) && (rec.next()))
             {			
 				model.addRow(new Object[0]);
-				model.setValueAt(rec.getString("Admin_ID"), row, 0);
-				model.setValueAt(rec.getString("Admin_Username"), row, 1);
-				model.setValueAt(rec.getString("Admin_Password"), row, 2);
-				model.setValueAt(rec.getString("Admin_FirstName"), row, 3);
-                                model.setValueAt(rec.getString("Admin_LastName"), row, 4);
-                                model.setValueAt(rec.getString("Admin_CardID"), row, 5);
-                                model.setValueAt(rec.getString("Admin_Phonenumber"), row, 6);
+			
+				model.setValueAt(rec.getString("Admin_Username"), row, 0);
+				model.setValueAt(rec.getString("Admin_Password"), row, 1);
+				model.setValueAt(rec.getString("Admin_FirstName"), row, 2);
+                                model.setValueAt(rec.getString("Admin_LastName"), row, 3);
+                                model.setValueAt(rec.getString("Admin_CardID"), row, 4);
+                                model.setValueAt(rec.getString("Admin_Phonenumber"), row, 5);
+                         
 			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
 			//	model.setValueAt(rec.getFloat("Used"), row, 5);
 				row++;
@@ -117,12 +118,9 @@ sorter.setSortKeys(null);
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txt_aid = new javax.swing.JTextField();
-        txt_username = new javax.swing.JTextField();
         txt_password = new javax.swing.JTextField();
         txt_fname = new javax.swing.JTextField();
         txt_lname = new javax.swing.JTextField();
@@ -133,6 +131,7 @@ sorter.setSortKeys(null);
         txt_cardid = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txt_tel = new javax.swing.JTextField();
+        txt_aid = new javax.swing.JTextField();
         btn_menu = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         out_user = new javax.swing.JLabel();
@@ -152,11 +151,17 @@ sorter.setSortKeys(null);
 
             },
             new String [] {
-                "รหัสผู้จัดการ", "ชื่อผู้ใช้", "รหัสผ่าน", "ชื่อ", "นามสกุล", "รหัสบัตรประชาชน", "เบอร์โทรศัพท์"
+                "รหัสผู้จัดการ", "รหัสผ่าน", "ชื่อ", "นามสกุล", "รหัสบัตรประชาชน", "เบอร์โทรศัพท์"
             }
-        ));
-        Table_Admin.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        Table_Admin.setSurrendersFocusOnKeystroke(true);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         Table_Admin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 Table_AdminMouseMoved(evt);
@@ -174,9 +179,6 @@ sorter.setSortKeys(null);
         jLabel3.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel3.setText("รหัสผู้จัดการ");
 
-        jLabel4.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-        jLabel4.setText("ชื่อผู้ใช้");
-
         jLabel5.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel5.setText("รหัสผ่าน");
 
@@ -185,10 +187,6 @@ sorter.setSortKeys(null);
 
         jLabel7.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
         jLabel7.setText("นามสกุล");
-
-        txt_aid.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
-
-        txt_username.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
         txt_password.setFont(new java.awt.Font("TH Sarabun New", 0, 18)); // NOI18N
 
@@ -248,7 +246,6 @@ sorter.setSortKeys(null);
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(40, 40, 40)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel4)
                                         .addComponent(jLabel3)
                                         .addComponent(jLabel5)
                                         .addComponent(jLabel6)
@@ -256,22 +253,21 @@ sorter.setSortKeys(null);
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addContainerGap()
                                     .addComponent(jLabel8))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_aid, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                            .addComponent(txt_username)
-                            .addComponent(txt_password)
+                            .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(txt_fname)
                             .addComponent(txt_lname)
                             .addComponent(txt_cardid)
-                            .addComponent(txt_tel))))
+                            .addComponent(txt_tel)
+                            .addComponent(txt_aid))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(btn_Add, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btn_detete, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(btn_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -281,14 +277,9 @@ sorter.setSortKeys(null);
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txt_aid)
-                        .addGap(3, 3, 3)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addComponent(txt_aid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -342,6 +333,12 @@ sorter.setSortKeys(null);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(341, Short.MAX_VALUE)
+                .addComponent(btn_menu)
+                .addGap(213, 213, 213)
+                .addComponent(jLabel12)
+                .addGap(298, 298, 298))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
@@ -352,27 +349,25 @@ sorter.setSortKeys(null);
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(out_user)
                         .addGap(163, 163, 163)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(337, Short.MAX_VALUE)
-                        .addComponent(btn_menu)
-                        .addGap(213, 213, 213)
-                        .addComponent(jLabel12)))
+                        .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel10)
-                        .addComponent(out_user)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel10)
+                                .addComponent(out_user)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 66, Short.MAX_VALUE)
@@ -380,10 +375,6 @@ sorter.setSortKeys(null);
                         .addComponent(jLabel12)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(16, 16, 16))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -396,17 +387,17 @@ sorter.setSortKeys(null);
 
     private void Table_AdminMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table_AdminMouseMoved
         // TODO add your handling code here:
-             DefaultTableModel model = (DefaultTableModel) Table_Admin.getModel();
+            DefaultTableModel model = (DefaultTableModel) Table_Admin.getModel();
  // U_id=(model.getValueAt(Table_Admin.getSelectedRow(),0).toString());
       txt_aid.setText(model.getValueAt(Table_Admin.getSelectedRow(),0).toString());
-     txt_username.setText(model.getValueAt(Table_Admin.getSelectedRow(),1).toString());
-      txt_password.setText(model.getValueAt(Table_Admin.getSelectedRow(),2).toString());
+     txt_password.setText(model.getValueAt(Table_Admin.getSelectedRow(),1).toString());
+      txt_fname.setText(model.getValueAt(Table_Admin.getSelectedRow(),2).toString());
   //  E_name.setText(model.getValueAt(showcourse.getSelectedRow(),1).toString());
    // E_lastname.setText(model.getValueAt(showcourse.getSelectedRow(),2).toString());
-    txt_fname.setText(model.getValueAt(Table_Admin.getSelectedRow(),3).toString());
-    txt_lname.setText(model.getValueAt(Table_Admin.getSelectedRow(),4).toString());
-    txt_cardid.setText(model.getValueAt(Table_Admin.getSelectedRow(),5).toString());
-        txt_tel.setText(model.getValueAt(Table_Admin.getSelectedRow(),6).toString());
+    txt_lname.setText(model.getValueAt(Table_Admin.getSelectedRow(),3).toString());
+    txt_cardid.setText(model.getValueAt(Table_Admin.getSelectedRow(),4).toString());
+    txt_tel.setText(model.getValueAt(Table_Admin.getSelectedRow(),5).toString());
+
     }//GEN-LAST:event_Table_AdminMouseMoved
 
     private void btn_menuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_menuActionPerformed
@@ -418,25 +409,25 @@ sorter.setSortKeys(null);
 
     private void btn_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AddActionPerformed
         // TODO add your handling code here:
-        ad.AddAdmin(Integer.valueOf(txt_aid.getText()),txt_username.getText(),txt_password.getText(),txt_fname.getText(),txt_lname.getText()
+        ad.AddAdmin(txt_aid.getText(),txt_password.getText(),txt_fname.getText(),txt_lname.getText()
                 ,txt_cardid.getText(),txt_tel.getText());
         
     }//GEN-LAST:event_btn_AddActionPerformed
 
     private void btn_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editActionPerformed
         // TODO add your handling code here:
-                ad.EditAdmin(Integer.valueOf(txt_aid.getText()),txt_username.getText(),txt_password.getText(),txt_fname.getText(),txt_lname.getText()
+                ad.EditAdmin(txt_aid.getText(),txt_password.getText(),txt_fname.getText(),txt_lname.getText()
                 ,txt_cardid.getText(),txt_tel.getText());
     }//GEN-LAST:event_btn_editActionPerformed
 
     private void btn_deteteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deteteActionPerformed
         // TODO add your handling code here:
-        ad.DeleteAdmin(txt_username.getText());
+        ad.DeleteAdmin(txt_aid.getText());
     }//GEN-LAST:event_btn_deteteActionPerformed
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         // TODO add your handling code here:
-           DefaultTableModel model = (DefaultTableModel)Table_Admin.getModel();
+          DefaultTableModel model = (DefaultTableModel)Table_Admin.getModel();
 	
         	//Header Sort
 		TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel> (model);
@@ -453,22 +444,20 @@ sorter.setSortKeys(null);
                     connect = DriverManager.getConnection ( urlConnection,usernameDB,passwordDB);
                     stmt=connect.createStatement();
 			
-			sql = "SELECT * FROM  admin  ORDER BY Admin_Username ASC";
+			sql = "SELECT * FROM  admin ";
 			
 			ResultSet rec = stmt.executeQuery(sql);
 			int row = 0;
 			while((rec!=null) && (rec.next()))
             {			
 				//model.addRow(new Object[0]);
-				model.setValueAt(rec.getString("Admin_ID"), row, 0);
-				model.setValueAt(rec.getString("Admin_Username"), row, 1);
-				model.setValueAt(rec.getString("Admin_Password"), row, 2);
-				model.setValueAt(rec.getString("Admin_FirstName"), row, 3);
-                                model.setValueAt(rec.getString("Admin_LastName"), row, 4);
-                                model.setValueAt(rec.getString("Admin_CardID"), row, 5);
-                                model.setValueAt(rec.getString("Admin_Phonenumber"), row, 6);
-			//	model.setValueAt(rec.getFloat("Budget"), row, 4);
-			//	model.setValueAt(rec.getFloat("Used"), row, 5);
+				
+				model.setValueAt(rec.getString("Admin_Username"), row, 0);
+				model.setValueAt(rec.getString("Admin_Password"), row, 1);
+				model.setValueAt(rec.getString("Admin_FirstName"), row, 2);
+                                model.setValueAt(rec.getString("Admin_LastName"), row, 3);
+                                model.setValueAt(rec.getString("Admin_CardID"), row, 4);
+                                model.setValueAt(rec.getString("Admin_Phonenumber"), row, 5);
 				row++;
             }
 
@@ -488,7 +477,7 @@ sorter.setSortKeys(null);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+                }
     }//GEN-LAST:event_formMouseMoved
                
     /**
@@ -537,7 +526,6 @@ sorter.setSortKeys(null);
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -552,6 +540,5 @@ sorter.setSortKeys(null);
     private javax.swing.JTextField txt_lname;
     private javax.swing.JTextField txt_password;
     private javax.swing.JTextField txt_tel;
-    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }
